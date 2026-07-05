@@ -338,6 +338,9 @@
     <div class="sidebar-section">Objects</div>
     <div class="nav-item" onclick="showLesson(9)">🧱 Object Basics</div>
     <div class="nav-item" onclick="showLesson(10)">📂 Array of Objects</div>
+
+    <div class="sidebar-section">Projects</div>
+    <div class="nav-item" onclick="showLesson(11)">🚀 Final Projects</div>
   </nav>
 
   <!-- ══════════════ MAIN ══════════════ -->
@@ -390,6 +393,23 @@ console.<span class="fn">log</span>(name, age);  <span class="cm">// John 21</sp
 
 document.<span class="fn">getElementById</span>(<span class="str">"out0"</span>).textContent =
   <span class="str">`Name: ${myName}, Age: ${myAge}, Food: ${myFood}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-01.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>Create a <strong>simple receipt</strong>. Make variables for: <code>itemName</code>, <code>pricePerItem</code>, <code>quantity</code>. Calculate the <code>subtotal</code>, then add 10% tax to get the <code>total</code>. Display it like a real receipt:</p>
+          <pre style="margin-bottom:0; background:var(--code-bg)">Item: Pizza
+Qty:  3
+Price: $12 each
+Subtotal: $36
+Tax (10%): $3.60
+Total: $39.60</pre>
         </div>
       </div>
 
@@ -446,6 +466,23 @@ document.<span class="fn">getElementById</span>(<span class="str">"out0"</span>)
 }
 document.<span class="fn">getElementById</span>(<span class="str">"out1"</span>).textContent =
   <span class="str">`Score 95: ${getGrade(95)} | Score 70: ${getGrade(70)} | Score 50: ${getGrade(50)}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-02.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>Write a function <code>ticketPrice(age)</code> that returns the correct movie ticket price:</p>
+          <p>🧒 Under 5 → <strong>Free</strong><br>
+             👦 5–12 → <strong>$5</strong><br>
+             🧑 13–17 → <strong>$8</strong><br>
+             🧑 18–64 → <strong>$12</strong><br>
+             👴 65+ → <strong>$7 (senior)</strong></p>
+          <p>Test it with ages: 3, 10, 15, 30, 70. Display all results on the page.</p>
         </div>
       </div>
 
@@ -507,6 +544,22 @@ document.<span class="fn">getElementById</span>(<span class="str">"out1"</span>)
         </div>
       </div>
 
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-03.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>You have an array of 5 numbers: <code>[4, 7, 2, 9, 1]</code>.</p>
+          <p>Using a <strong>for loop</strong> (not .map or .filter), go through the array and:</p>
+          <p>➕ Add up all numbers to get the <strong>total</strong><br>
+             🔼 Find the <strong>biggest</strong> number<br>
+             🔽 Find the <strong>smallest</strong> number</p>
+          <p>Display all three results on the page. Hint: start with <code>let biggest = numbers[0]</code>.</p>
+        </div>
+      </div>
+
       <div class="lesson-nav">
         <button class="btn btn-ghost" onclick="showLesson(1)">← Conditions</button>
         <button class="btn btn-primary" onclick="showLesson(3)">Next: Functions →</button>
@@ -562,6 +615,21 @@ document.<span class="fn">getElementById</span>(<span class="str">"out3"</span>)
         </div>
       </div>
 
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-04.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>Build a <strong>tip calculator</strong> with three functions:</p>
+          <p>1️⃣ <code>calcTip(bill, percent)</code> → returns the tip amount<br>
+             2️⃣ <code>splitBill(total, people)</code> → returns amount per person<br>
+             3️⃣ <code>formatMoney(amount)</code> → returns a string like <code>"$12.50"</code> (2 decimal places)</p>
+          <p>Test: Bill = $85, tip = 15%, split between 4 people. Display the tip, total, and each person's share nicely formatted.</p>
+        </div>
+      </div>
+
       <div class="lesson-nav">
         <button class="btn btn-ghost" onclick="showLesson(2)">← For Loop</button>
         <button class="btn btn-primary" onclick="showLesson(4)">Next: Array Basics →</button>
@@ -610,6 +678,22 @@ document.<span class="fn">getElementById</span>(<span class="str">"out4"</span>)
         </div>
       </div>
 
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-05.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>Build a <strong>to-do list</strong> using only array methods.</p>
+          <p>Start with: <code>["Buy milk", "Walk dog", "Read book"]</code></p>
+          <p>➕ Add two more tasks with <code>.push()</code><br>
+             ❌ Remove the last task with <code>.pop()</code><br>
+             🔄 Use a <strong>for loop</strong> to display each task numbered: <code>1. Buy milk</code>, <code>2. Walk dog</code>...<br>
+             📊 Show the total count at the end</p>
+        </div>
+      </div>
+
       <div class="lesson-nav">
         <button class="btn btn-ghost" onclick="showLesson(3)">← Functions</button>
         <button class="btn btn-primary" onclick="showLesson(5)">Next: .map() →</button>
@@ -655,6 +739,22 @@ console.<span class="fn">log</span>(doubled); <span class="cm">// [20, 40, 60]</
 <span class="kw">const</span> fahrenheit = celsius.<span class="fn">map</span>((c) => (c * <span class="num">9</span>/<span class="num">5</span>) + <span class="num">32</span>);
 document.<span class="fn">getElementById</span>(<span class="str">"out5"</span>).textContent =
   <span class="str">`Celsius: ${celsius} → Fahrenheit: ${fahrenheit}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-06.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>You have an array of student names: <code>["alice", "bob", "charlie", "diana"]</code></p>
+          <p>Use <code>.map()</code> to create a new array where each name is:</p>
+          <p>✅ First letter <strong>capitalized</strong> (hint: <code>name[0].toUpperCase() + name.slice(1)</code>)<br>
+             ✅ Has <code>"Student: "</code> in front of it<br>
+             ✅ Has their name <strong>length</strong> in brackets at the end</p>
+          <p>Result should look like: <code>["Student: Alice (5)", "Student: Bob (3)", ...]</code></p>
         </div>
       </div>
 
@@ -716,6 +816,22 @@ document.<span class="fn">getElementById</span>(<span class="str">"out6"</span>)
         </div>
       </div>
 
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-07.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>You have a list of words: <code>["apple", "banana", "kiwi", "strawberry", "fig", "blueberry", "plum"]</code></p>
+          <p>Do these steps using <code>.filter()</code> and <code>.map()</code>:</p>
+          <p>1️⃣ Filter only words <strong>longer than 5 letters</strong><br>
+             2️⃣ Map them to <strong>UPPERCASE</strong><br>
+             3️⃣ Display how many passed the filter and what they are</p>
+          <p>Expected: 4 words pass — BANANA, STRAWBERRY, BLUEBERRY... which is the 4th?</p>
+        </div>
+      </div>
+
       <div class="lesson-nav">
         <button class="btn btn-ghost" onclick="showLesson(5)">← .map()</button>
         <button class="btn btn-primary" onclick="showLesson(7)">Next: .find() →</button>
@@ -773,6 +889,25 @@ document.<span class="fn">getElementById</span>(<span class="str">"out7"</span>)
         </div>
       </div>
 
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-08.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>You have a list of employees:</p>
+          <pre style="margin-bottom:12px; background:var(--code-bg)">{ name: "Tom",   dept: "HR",   salary: 3000 }
+{ name: "Lisa",  dept: "Tech", salary: 5500 }
+{ name: "Mark",  dept: "Tech", salary: 4800 }
+{ name: "Sarah", dept: "HR",   salary: 3200 }</pre>
+          <p>Use <code>.find()</code> to answer these:</p>
+          <p>🔍 Who is the <strong>first Tech employee</strong>?<br>
+             🔍 Who is the <strong>first person earning over $5000</strong>?<br>
+             🔍 Is there anyone in the <strong>"Marketing"</strong> dept? (what does .find return if not found?)</p>
+        </div>
+      </div>
+
       <div class="lesson-nav">
         <button class="btn btn-ghost" onclick="showLesson(6)">← .filter()</button>
         <button class="btn btn-primary" onclick="showLesson(8)">Next: .some() & .every() →</button>
@@ -822,6 +957,26 @@ scores.<span class="fn">every</span>((s) => s >= <span class="num">70</span>); <
 
 document.<span class="fn">getElementById</span>(<span class="str">"out8"</span>).textContent =
   <span class="str">`Any item over $100? ${hasExpensive} | All in stock? ${allInStock}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-09.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>You're checking if a <strong>team is ready to play</strong>. Each player has a name, age, and hasBoot (true/false):</p>
+          <pre style="margin-bottom:12px; background:var(--code-bg)">{ name: "Ali",   age: 16, hasBoot: true  }
+{ name: "Nour",  age: 14, hasBoot: true  }
+{ name: "Sam",   age: 17, hasBoot: false }
+{ name: "James", age: 15, hasBoot: true  }</pre>
+          <p>Answer these using <code>.some()</code> and <code>.every()</code>:</p>
+          <p>✅ Does <strong>every</strong> player have boots?<br>
+             ✅ Is <strong>any</strong> player 16 or older?<br>
+             ✅ Are <strong>all</strong> players under 18?<br>
+             ✅ Is the team <strong>ready</strong>? (everyone has boots AND is under 18)</p>
         </div>
       </div>
 
@@ -880,6 +1035,20 @@ book.isRead = <span class="kw">true</span>;   <span class="cm">// add new key</s
 
 document.<span class="fn">getElementById</span>(<span class="str">"out9"</span>).textContent =
   <span class="str">`"${book.title}" by ${book.author} | ${book.pages}p | ${book.year} | Read: ${book.isRead}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-10.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>Create an object for a <strong>car</strong> with: <code>brand</code>, <code>model</code>, <code>year</code>, <code>color</code>, <code>km</code> (kilometers driven).</p>
+          <p>Then write a function <code>describeCar(car)</code> that returns a full sentence like:</p>
+          <pre style="margin-bottom:12px; background:var(--code-bg)">"2019 Toyota Camry (Blue) — 45,000 km driven"</pre>
+          <p>Also write <code>isOld(car)</code> that returns <code>true</code> if the car is older than 10 years. Test with your car object and display both results.</p>
         </div>
       </div>
 
@@ -944,9 +1113,130 @@ document.<span class="fn">getElementById</span>(<span class="str">"out10"</span>
         </div>
       </div>
 
+      <div class="exercise-label" style="color:var(--red)">🔥 Challenge — No Solution</div>
+      <div class="exercise-box" style="border-color:#ff6b6b44">
+        <div class="exercise-header">
+          <span>challenge-11.html</span>
+          <span style="color:var(--red); font-size:12px">Figure it out! 💪</span>
+        </div>
+        <div class="exercise-body">
+          <p>You have a list of movies:</p>
+          <pre style="margin-bottom:12px; background:var(--code-bg)">{ title: "Inception",    year: 2010, rating: 8.8, watched: true  }
+{ title: "The Room",     year: 2003, rating: 3.7, watched: false }
+{ title: "Interstellar", year: 2014, rating: 8.6, watched: true  }
+{ title: "Cats",         year: 2019, rating: 2.8, watched: false }
+{ title: "Parasite",     year: 2019, rating: 8.5, watched: false }</pre>
+          <p>Answer all using array methods:</p>
+          <p>🎬 Get titles of movies you <strong>haven't watched</strong> yet<br>
+             ⭐ Get movies with rating <strong>above 8</strong> — are <strong>all</strong> of them watched?<br>
+             🔍 Find the <strong>first unwatched</strong> movie with rating above 8<br>
+             📊 Display a summary: <code>"X watched, Y unwatched"</code></p>
+        </div>
+      </div>
+
       <div class="lesson-nav">
         <button class="btn btn-ghost" onclick="showLesson(9)">← Object Basics</button>
-        <button class="btn btn-green" onclick="showLesson(0)">🎉 Start Over</button>
+        <button class="btn btn-green" onclick="showLesson(11)">🚀 Final Projects →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 11: Final Projects ══ -->
+    <section class="lesson" id="lesson-11">
+      <div class="lesson-tag">Final Projects · Put It All Together</div>
+      <h1 class="lesson-title">🚀 Final Projects</h1>
+      <p class="lesson-desc">Use everything you learned — variables, conditions, loops, functions, arrays, and objects — to build two real mini-apps. No hints, no solutions. You've got this!</p>
+
+      <!-- PROJECT 1 -->
+      <div style="margin-bottom:12px">
+        <div class="exercise-label" style="color:var(--accent2); font-size:13px">🛒 Project 1 — Shopping Cart</div>
+      </div>
+      <div class="exercise-box" style="border-color: #38e0b844; margin-bottom:40px">
+        <div class="exercise-header">
+          <span>project-shopping-cart.html</span>
+          <span style="color:var(--accent2); font-size:12px">Estimated: 45–60 min</span>
+        </div>
+        <div class="exercise-body">
+          <p>Build a <strong>shopping cart</strong> that works in the browser. Here's what it needs to do:</p>
+
+          <p><strong>Data:</strong> Start with an array of product objects, each with <code>id</code>, <code>name</code>, <code>price</code>, and <code>inStock</code>.</p>
+
+          <p><strong>Features to build:</strong></p>
+          <p>
+            🛍️ Display all products on the page (use <code>.map()</code> to generate HTML)<br>
+            ➕ "Add to Cart" button on each product — only works if <code>inStock: true</code><br>
+            🛒 Show cart items with name, price, and a ❌ Remove button<br>
+            💰 Show the <strong>total price</strong> of all items in the cart<br>
+            🔢 Show the <strong>number of items</strong> in the cart<br>
+            🚫 If cart is empty, show <em>"Your cart is empty"</em>
+          </p>
+
+          <p><strong>Hints:</strong></p>
+          <pre style="background:var(--code-bg); margin-bottom:12px">// Start with these arrays:
+const products = [
+  { id: 1, name: "Laptop",  price: 999, inStock: true  },
+  { id: 2, name: "Mouse",   price: 25,  inStock: true  },
+  { id: 3, name: "Monitor", price: 350, inStock: false },
+  { id: 4, name: "Keyboard",price: 75,  inStock: true  },
+  { id: 5, name: "Webcam",  price: 60,  inStock: false },
+];
+
+let cart = []; // start empty, push items here</pre>
+          <p>Use <code>document.getElementById()</code> to update the page. Use <code>.filter()</code> to remove items from the cart. Use <code>.reduce()</code> (or a for loop) to total the prices.</p>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div style="margin-bottom:12px">
+        <div class="exercise-label" style="color:var(--accent2); font-size:13px">🎓 Project 2 — Student Report Card</div>
+      </div>
+      <div class="exercise-box" style="border-color: #38e0b844; margin-bottom:40px">
+        <div class="exercise-header">
+          <span>project-report-card.html</span>
+          <span style="color:var(--accent2); font-size:12px">Estimated: 60–90 min</span>
+        </div>
+        <div class="exercise-body">
+          <p>Build a <strong>student report card generator</strong>. Given a list of students with their scores, display a full report.</p>
+
+          <p><strong>Data:</strong></p>
+          <pre style="background:var(--code-bg); margin-bottom:12px">const students = [
+  { name: "Alice",   scores: [88, 92, 75, 95, 80] },
+  { name: "Bob",     scores: [60, 55, 70, 65, 58] },
+  { name: "Charlie", scores: [95, 98, 100, 92, 97] },
+  { name: "Diana",   scores: [72, 68, 74, 70, 80] },
+  { name: "Eve",     scores: [45, 50, 40, 55, 48] },
+];</pre>
+
+          <p><strong>For each student, calculate and display:</strong></p>
+          <p>
+            📊 Their <strong>average score</strong> (sum ÷ number of scores)<br>
+            🏅 Their <strong>grade</strong> using your <code>getGrade()</code> function from Lesson 2<br>
+            🔼 Their <strong>highest</strong> score<br>
+            🔽 Their <strong>lowest</strong> score<br>
+            ✅ Whether they <strong>passed</strong> (average ≥ 60)
+          </p>
+
+          <p><strong>Also show a class summary at the bottom:</strong></p>
+          <p>
+            🥇 Who has the <strong>highest average</strong>?<br>
+            📉 Who has the <strong>lowest average</strong>?<br>
+            📋 How many students <strong>passed</strong>? How many <strong>failed</strong>?<br>
+            📊 What is the <strong>class average</strong>?
+          </p>
+
+          <p><strong>Hints:</strong> Use <code>.map()</code> to process each student. Use <code>.find()</code> or sorting for best/worst. Use <code>.filter()</code> to count passed/failed. Make it look nice with some basic HTML structure!</p>
+        </div>
+      </div>
+
+      <div style="background: var(--card); border: 1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:24px; text-align:center">
+        <div style="font-size:36px; margin-bottom:12px">(*^▽^*)</div>
+        <h2 style="margin-bottom:8px; font-size:20px">You finished the course!</h2>
+        <p style="color:var(--muted); font-size:14px; margin-bottom:20px">You've learned variables, conditions, loops, functions, arrays, objects and all the key array methods. Now go build something real!</p>
+        <button class="btn btn-primary" onclick="showLesson(0)">← Back to Start</button>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(10)">← Array of Objects</button>
+        <span></span>
       </div>
     </section>
 
@@ -954,7 +1244,7 @@ document.<span class="fn">getElementById</span>(<span class="str">"out10"</span>
 </div>
 
 <script>
-  const TOTAL = 11;
+  const TOTAL = 12;
 
   function showLesson(n) {
     document.querySelectorAll('.lesson').forEach(l => l.classList.remove('active'));

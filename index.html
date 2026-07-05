@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Lessons</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg:        #0f1117;
+      --surface:   #1a1d27;
+      --card:      #20243a;
+      --border:    #2e3350;
+      --accent:    #7c6aff;
+      --accent2:   #38e0b8;
+      --yellow:    #f5c542;
+      --red:       #ff6b6b;
+      --text:      #e4e6f0;
+      --muted:     #7a7f9a;
+      --code-bg:   #13151f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    .layout { display: flex; min-height: 100vh; }
+
+    .sidebar {
+      width: 240px;
+      min-width: 240px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-logo {
+      padding: 0 20px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-logo span { color: var(--accent2); }
+
+    .sidebar-section {
+      padding: 8px 20px 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      font-size: 13.5px;
+      color: var(--muted);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .nav-item:hover { background: var(--card); color: var(--text); }
+
+    .nav-item.active {
+      background: var(--card);
+      color: var(--accent);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-item .badge {
+      margin-left: auto;
+      font-size: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 2px 7px;
+      border-radius: 99px;
+    }
+
+    /* ── MAIN ── */
+    .main { flex: 1; padding: 40px 48px; max-width: 860px; }
+
+    .lesson { display: none; }
+    .lesson.active { display: block; }
+
+    /* ── LESSON HEADER ── */
+    .lesson-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 8px;
+    }
+
+    .lesson-title {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .lesson-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+
+    /* ── EXPLANATION CARD ── */
+    .explain {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .explain h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .explain p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .explain p:last-child { margin-bottom: 0; }
+
+    /* ── CODE BLOCK ── */
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin-bottom: 24px;
+      color: #cdd6f4;
+    }
+
+    .kw  { color: #cba6f7; } /* keyword */
+    .fn  { color: #89b4fa; } /* function */
+    .str { color: #a6e3a1; } /* string */
+    .num { color: #fab387; } /* number */
+    .cm  { color: #585b70; font-style: italic; } /* comment */
+    .op  { color: #89dceb; } /* operator */
+
+    /* ── EXERCISE ── */
+    .exercise-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .exercise-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .exercise-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .exercise-header span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .exercise-body { padding: 20px; }
+
+    .exercise-body p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    /* live demo area */
+    .demo-area {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .demo-area p { color: var(--text); margin: 0; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover { background: #6a58e8; transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+    .btn-green {
+      background: var(--accent2);
+      color: #0f1117;
+    }
+
+    .btn-green:hover { opacity: 0.85; }
+
+    /* ── SOLUTION TOGGLE ── */
+    .solution { display: none; }
+    .solution.show { display: block; }
+
+    /* ── NAV BUTTONS ── */
+    .lesson-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      background: var(--border);
+      height: 3px;
+      border-radius: 99px;
+      margin-bottom: 32px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transition: width 0.3s;
+    }
+
+    /* ── INLINE CODE ── */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent2);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .sidebar { display: none; }
+      .main { padding: 24px 20px; }
+      .lesson-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">JS<span>.learn</span></div>
+
+    <div class="sidebar-section">Basics</div>
+    <div class="nav-item active" onclick="showLesson(0)">📦 Variables</div>
+    <div class="nav-item" onclick="showLesson(1)">🔀 Conditions</div>
+    <div class="nav-item" onclick="showLesson(2)">🔁 For Loop</div>
+    <div class="nav-item" onclick="showLesson(3)">⚙️ Functions</div>
+
+    <div class="sidebar-section">Arrays</div>
+    <div class="nav-item" onclick="showLesson(4)">📋 Array Basics</div>
+    <div class="nav-item" onclick="showLesson(5)">🗺️ .map()</div>
+    <div class="nav-item" onclick="showLesson(6)">🔍 .filter()</div>
+    <div class="nav-item" onclick="showLesson(7)">🔎 .find()</div>
+    <div class="nav-item" onclick="showLesson(8)">✅ .some() & .every()</div>
+
+    <div class="sidebar-section">Objects</div>
+    <div class="nav-item" onclick="showLesson(9)">🧱 Object Basics</div>
+    <div class="nav-item" onclick="showLesson(10)">📂 Array of Objects</div>
+  </nav>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <main class="main">
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress" style="width: 9%"></div>
+    </div>
+
+    <!-- ══ LESSON 0: Variables ══ -->
+    <section class="lesson active" id="lesson-0">
+      <div class="lesson-tag">Lesson 1 · Basics</div>
+      <h1 class="lesson-title">Variables</h1>
+      <p class="lesson-desc">Variables are containers that store data. In modern JavaScript we use <code>let</code> and <code>const</code>.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p><code>const</code> — value never changes (most of the time, use this).</p>
+        <p><code>let</code> — value can change later.</p>
+        <p><code>var</code> — old way, avoid it.</p>
+      </div>
+
+<pre><span class="kw">const</span> name = <span class="str">"John"</span>;       <span class="cm">// cannot reassign</span>
+<span class="kw">let</span> age = <span class="num">20</span>;             <span class="cm">// can reassign later</span>
+age = <span class="num">21</span>;               <span class="cm">// ✅ works because it's let</span>
+
+<span class="kw">const</span> isStudent = <span class="kw">true</span>;   <span class="cm">// boolean</span>
+
+console.<span class="fn">log</span>(name, age);  <span class="cm">// John 21</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-01.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s0')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Create variables for your <strong>name</strong>, <strong>age</strong>, and <strong>favourite food</strong>. Then display them on the page inside a <code>&lt;p&gt;</code> tag.</p>
+
+          <div class="demo-area" id="demo0">
+            <p id="out0">👆 Click Run to see output</p>
+          </div>
+
+          <button class="btn btn-primary" onclick="runEx0()">▶ Run My Code</button>
+
+<pre class="solution" id="s0"><span class="cm">// Your answer goes here:</span>
+<span class="kw">const</span> myName = <span class="str">"Sarah"</span>;
+<span class="kw">const</span> myAge = <span class="num">22</span>;
+<span class="kw">const</span> myFood = <span class="str">"Pizza"</span>;
+
+document.<span class="fn">getElementById</span>(<span class="str">"out0"</span>).textContent =
+  <span class="str">`Name: ${myName}, Age: ${myAge}, Food: ${myFood}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <span></span>
+        <button class="btn btn-primary" onclick="showLesson(1)">Next: Conditions →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 1: Conditions ══ -->
+    <section class="lesson" id="lesson-1">
+      <div class="lesson-tag">Lesson 2 · Basics</div>
+      <h1 class="lesson-title">Conditions</h1>
+      <p class="lesson-desc">Conditions let your code make decisions — run different code depending on whether something is true or false.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p><code>if</code> runs the block when the condition is <strong>true</strong>.</p>
+        <p><code>else if</code> checks another condition if the first was false.</p>
+        <p><code>else</code> runs when none of the above matched.</p>
+      </div>
+
+<pre><span class="kw">const</span> age = <span class="num">20</span>;
+
+<span class="kw">if</span> (age >= <span class="num">18</span>) {
+  console.<span class="fn">log</span>(<span class="str">"Adult"</span>);
+} <span class="kw">else if</span> (age >= <span class="num">13</span>) {
+  console.<span class="fn">log</span>(<span class="str">"Teenager"</span>);
+} <span class="kw">else</span> {
+  console.<span class="fn">log</span>(<span class="str">"Child"</span>);
+}
+<span class="cm">// Output: Adult</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-02.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s1')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Write a function <code>getGrade(score)</code> that returns:</p>
+          <p>🏆 <strong>"A"</strong> if score ≥ 90 &nbsp;|&nbsp; 👍 <strong>"B"</strong> if ≥ 75 &nbsp;|&nbsp; 😐 <strong>"C"</strong> if ≥ 60 &nbsp;|&nbsp; ❌ <strong>"Fail"</strong> otherwise</p>
+
+          <div class="demo-area" id="demo1">
+            <p id="out1">👆 Click Run to see output</p>
+          </div>
+          <button class="btn btn-primary" onclick="runEx1()">▶ Run My Code</button>
+
+<pre class="solution" id="s1"><span class="kw">function</span> <span class="fn">getGrade</span>(score) {
+  <span class="kw">if</span> (score >= <span class="num">90</span>) <span class="kw">return</span> <span class="str">"🏆 A"</span>;
+  <span class="kw">else if</span> (score >= <span class="num">75</span>) <span class="kw">return</span> <span class="str">"👍 B"</span>;
+  <span class="kw">else if</span> (score >= <span class="num">60</span>) <span class="kw">return</span> <span class="str">"😐 C"</span>;
+  <span class="kw">else</span> <span class="kw">return</span> <span class="str">"❌ Fail"</span>;
+}
+document.<span class="fn">getElementById</span>(<span class="str">"out1"</span>).textContent =
+  <span class="str">`Score 95: ${getGrade(95)} | Score 70: ${getGrade(70)} | Score 50: ${getGrade(50)}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(0)">← Variables</button>
+        <button class="btn btn-primary" onclick="showLesson(2)">Next: For Loop →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 2: For Loop ══ -->
+    <section class="lesson" id="lesson-2">
+      <div class="lesson-tag">Lesson 3 · Basics</div>
+      <h1 class="lesson-title">For Loop</h1>
+      <p class="lesson-desc">A for loop repeats a block of code a set number of times — great for counting or going through a list.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p><code>for (start; condition; step)</code> — the loop runs as long as the condition is true.</p>
+        <p>Use <code>for...of</code> to loop through arrays more simply.</p>
+      </div>
+
+<pre><span class="cm">// Classic for loop</span>
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i < <span class="num">3</span>; i++) {
+  console.<span class="fn">log</span>(i); <span class="cm">// 0, 1, 2</span>
+}
+
+<span class="cm">// for...of (easier for arrays)</span>
+<span class="kw">const</span> fruits = [<span class="str">"🍎 Apple"</span>, <span class="str">"🍌 Banana"</span>, <span class="str">"🍇 Grape"</span>];
+
+<span class="kw">for</span> (<span class="kw">const</span> fruit <span class="kw">of</span> fruits) {
+  console.<span class="fn">log</span>(fruit);
+}</pre>
+
+      <div class="exercise-label">✏️ Exercise — Outfit Picker</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-03.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s2')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Three arrays are given. Use <code>Math.random()</code> to pick one item from each array and display the full outfit.</p>
+
+          <h2 id="outfit" style="margin-bottom:12px; font-size:16px;">Today's outfit: —</h2>
+          <button class="btn btn-primary" onclick="pickOutfit()">🎲 Pick Outfit</button>
+
+<pre class="solution" id="s2"><span class="kw">const</span> shirts = [<span class="str">"👕 Red Shirt"</span>, <span class="str">"👕 Blue Shirt"</span>, <span class="str">"👕 Black Shirt"</span>];
+<span class="kw">const</span> pants  = [<span class="str">"👖 Jeans"</span>, <span class="str">"🩳 Shorts"</span>, <span class="str">"👖 Black Pants"</span>];
+<span class="kw">const</span> shoes  = [<span class="str">"👟 Sneakers"</span>, <span class="str">"🥾 Boots"</span>, <span class="str">"🩴 Sandals"</span>];
+
+<span class="kw">function</span> <span class="fn">pickOutfit</span>() {
+  <span class="cm">// Math.random() gives 0.0–0.99</span>
+  <span class="cm">// Math.floor() rounds down to whole number</span>
+  <span class="kw">const</span> shirt = shirts[Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * shirts.length)];
+  <span class="kw">const</span> pant  = pants[Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * pants.length)];
+  <span class="kw">const</span> shoe  = shoes[Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * shoes.length)];
+  document.<span class="fn">getElementById</span>(<span class="str">"outfit"</span>).textContent =
+    <span class="str">`Today's outfit: ${shirt} + ${pant} + ${shoe}`</span>;
+}</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(1)">← Conditions</button>
+        <button class="btn btn-primary" onclick="showLesson(3)">Next: Functions →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 3: Functions ══ -->
+    <section class="lesson" id="lesson-3">
+      <div class="lesson-tag">Lesson 4 · Basics</div>
+      <h1 class="lesson-title">Functions</h1>
+      <p class="lesson-desc">Functions are reusable blocks of code. Give them a name, call them whenever you need them.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p>A function can take <strong>parameters</strong> (inputs) and <strong>return</strong> a result.</p>
+        <p>Arrow functions <code>() =&gt; {}</code> are a shorter modern syntax.</p>
+      </div>
+
+<pre><span class="cm">// Regular function</span>
+<span class="kw">function</span> <span class="fn">greet</span>(name) {
+  <span class="kw">return</span> <span class="str">`Hello, ${name}!`</span>;
+}
+
+<span class="cm">// Arrow function (same thing, shorter)</span>
+<span class="kw">const</span> <span class="fn">greet</span> = (name) => <span class="str">`Hello, ${name}!`</span>;
+
+console.<span class="fn">log</span>(<span class="fn">greet</span>(<span class="str">"John"</span>)); <span class="cm">// Hello, John!</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-04.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s3')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Write a function <code>calcTotal(price, qty)</code> that returns the total price. Then write another <code>applyDiscount(total, percent)</code> that takes off the discount.</p>
+
+          <div class="demo-area"><p id="out3">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx3()">▶ Run My Code</button>
+
+<pre class="solution" id="s3"><span class="kw">function</span> <span class="fn">calcTotal</span>(price, qty) {
+  <span class="kw">return</span> price * qty;
+}
+
+<span class="kw">function</span> <span class="fn">applyDiscount</span>(total, percent) {
+  <span class="kw">return</span> total - (total * percent / <span class="num">100</span>);
+}
+
+<span class="kw">const</span> total    = <span class="fn">calcTotal</span>(<span class="num">50</span>, <span class="num">3</span>);       <span class="cm">// 150</span>
+<span class="kw">const</span> final    = <span class="fn">applyDiscount</span>(total, <span class="num">10</span>); <span class="cm">// 135</span>
+document.<span class="fn">getElementById</span>(<span class="str">"out3"</span>).textContent =
+  <span class="str">`Total: $${total} → After 10% off: $${final}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(2)">← For Loop</button>
+        <button class="btn btn-primary" onclick="showLesson(4)">Next: Array Basics →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 4: Array Basics ══ -->
+    <section class="lesson" id="lesson-4">
+      <div class="lesson-tag">Lesson 5 · Arrays</div>
+      <h1 class="lesson-title">Array Basics</h1>
+      <p class="lesson-desc">An array is a list of items stored in one variable. You can add, remove, and access items by their position.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p>Items are numbered starting at <code>0</code> — this is called the <strong>index</strong>.</p>
+        <p>Common methods: <code>.push()</code> add to end, <code>.pop()</code> remove from end, <code>.length</code> count items.</p>
+      </div>
+
+<pre><span class="kw">const</span> fruits = [<span class="str">"Apple"</span>, <span class="str">"Banana"</span>, <span class="str">"Grape"</span>];
+
+fruits[<span class="num">0</span>];         <span class="cm">// "Apple"  (first item)</span>
+fruits[<span class="num">2</span>];         <span class="cm">// "Grape"  (third item)</span>
+fruits.length;     <span class="cm">// 3</span>
+
+fruits.<span class="fn">push</span>(<span class="str">"Mango"</span>);  <span class="cm">// adds to end → 4 items</span>
+fruits.<span class="fn">pop</span>();         <span class="cm">// removes last → "Mango" gone</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-05.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s4')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Start with an array of 3 students. Add 2 more with <code>.push()</code>. Remove the last one with <code>.pop()</code>. Display the final list and its length.</p>
+
+          <div class="demo-area"><p id="out4">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx4()">▶ Run My Code</button>
+
+<pre class="solution" id="s4"><span class="kw">const</span> students = [<span class="str">"Alice"</span>, <span class="str">"Bob"</span>, <span class="str">"Charlie"</span>];
+students.<span class="fn">push</span>(<span class="str">"Diana"</span>);
+students.<span class="fn">push</span>(<span class="str">"Eve"</span>);
+students.<span class="fn">pop</span>();  <span class="cm">// removes Eve</span>
+document.<span class="fn">getElementById</span>(<span class="str">"out4"</span>).textContent =
+  <span class="str">`Students: ${students.join(", ")} | Total: ${students.length}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(3)">← Functions</button>
+        <button class="btn btn-primary" onclick="showLesson(5)">Next: .map() →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 5: .map() ══ -->
+    <section class="lesson" id="lesson-5">
+      <div class="lesson-tag">Lesson 6 · Arrays</div>
+      <h1 class="lesson-title">.map()</h1>
+      <p class="lesson-desc"><code>.map()</code> goes through every item in an array and <strong>transforms</strong> it — returning a brand new array.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p>The original array is never changed. <code>.map()</code> always returns a new array of the same length.</p>
+        <p>Think of it as: "do this to every item, give me the results."</p>
+      </div>
+
+<pre><span class="kw">const</span> prices = [<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>];
+
+<span class="cm">// Double every price</span>
+<span class="kw">const</span> doubled = prices.<span class="fn">map</span>((price) => price * <span class="num">2</span>);
+console.<span class="fn">log</span>(doubled); <span class="cm">// [20, 40, 60]</span>
+
+<span class="cm">// Add $ symbol to each</span>
+<span class="kw">const</span> names = [<span class="str">"john"</span>, <span class="str">"sarah"</span>];
+<span class="kw">const</span> upper = names.<span class="fn">map</span>((n) => n.<span class="fn">toUpperCase</span>());
+<span class="cm">// ["JOHN", "SARAH"]</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-06.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s5')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>You have an array of temperatures in Celsius. Use <code>.map()</code> to convert them all to Fahrenheit. Formula: <code>(C × 9/5) + 32</code></p>
+
+          <div class="demo-area"><p id="out5">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx5()">▶ Run My Code</button>
+
+<pre class="solution" id="s5"><span class="kw">const</span> celsius    = [<span class="num">0</span>, <span class="num">20</span>, <span class="num">37</span>, <span class="num">100</span>];
+<span class="kw">const</span> fahrenheit = celsius.<span class="fn">map</span>((c) => (c * <span class="num">9</span>/<span class="num">5</span>) + <span class="num">32</span>);
+document.<span class="fn">getElementById</span>(<span class="str">"out5"</span>).textContent =
+  <span class="str">`Celsius: ${celsius} → Fahrenheit: ${fahrenheit}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(4)">← Array Basics</button>
+        <button class="btn btn-primary" onclick="showLesson(6)">Next: .filter() →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 6: .filter() ══ -->
+    <section class="lesson" id="lesson-6">
+      <div class="lesson-tag">Lesson 7 · Arrays</div>
+      <h1 class="lesson-title">.filter()</h1>
+      <p class="lesson-desc"><code>.filter()</code> goes through every item and keeps only the ones that pass a condition — returning a smaller array.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p>If the condition returns <code>true</code> → item is kept. If <code>false</code> → item is removed.</p>
+        <p>Original array is unchanged. New array may be shorter.</p>
+      </div>
+
+<pre><span class="kw">const</span> ages = [<span class="num">12</span>, <span class="num">20</span>, <span class="num">16</span>, <span class="num">25</span>, <span class="num">14</span>];
+
+<span class="cm">// Keep only adults (18+)</span>
+<span class="kw">const</span> adults = ages.<span class="fn">filter</span>((age) => age >= <span class="num">18</span>);
+console.<span class="fn">log</span>(adults); <span class="cm">// [20, 25]</span>
+
+<span class="cm">// Keep only short words</span>
+<span class="kw">const</span> words  = [<span class="str">"hi"</span>, <span class="str">"hello"</span>, <span class="str">"ok"</span>, <span class="str">"goodbye"</span>];
+<span class="kw">const</span> short  = words.<span class="fn">filter</span>((w) => w.length <= <span class="num">3</span>);
+<span class="cm">// ["hi", "ok"]</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-07.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s6')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>You have a list of products with prices. Use <code>.filter()</code> to get only products under $50, then use <code>.map()</code> to get just their names.</p>
+
+          <div class="demo-area"><p id="out6">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx6()">▶ Run My Code</button>
+
+<pre class="solution" id="s6"><span class="kw">const</span> products = [
+  { name: <span class="str">"Shirt"</span>,  price: <span class="num">25</span> },
+  { name: <span class="str">"Shoes"</span>,  price: <span class="num">80</span> },
+  { name: <span class="str">"Hat"</span>,    price: <span class="num">15</span> },
+  { name: <span class="str">"Jacket"</span>, price: <span class="num">120</span> },
+  { name: <span class="str">"Socks"</span>,  price: <span class="num">8</span> },
+];
+
+<span class="kw">const</span> cheap = products
+  .<span class="fn">filter</span>((p) => p.price < <span class="num">50</span>)
+  .<span class="fn">map</span>((p) => p.name);
+
+document.<span class="fn">getElementById</span>(<span class="str">"out6"</span>).textContent =
+  <span class="str">`Affordable items: ${cheap.join(", ")}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(5)">← .map()</button>
+        <button class="btn btn-primary" onclick="showLesson(7)">Next: .find() →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 7: .find() ══ -->
+    <section class="lesson" id="lesson-7">
+      <div class="lesson-tag">Lesson 8 · Arrays</div>
+      <h1 class="lesson-title">.find()</h1>
+      <p class="lesson-desc"><code>.find()</code> returns the <strong>first</strong> item that matches a condition. If nothing matches, it returns <code>undefined</code>.</p>
+
+      <div class="explain">
+        <h3>📖 .find() vs .filter()</h3>
+        <p><code>.filter()</code> → returns an <strong>array</strong> of all matches.</p>
+        <p><code>.find()</code> → returns the <strong>first match</strong> only (one item, not an array).</p>
+      </div>
+
+<pre><span class="kw">const</span> users = [
+  { id: <span class="num">1</span>, name: <span class="str">"Alice"</span> },
+  { id: <span class="num">2</span>, name: <span class="str">"Bob"</span> },
+  { id: <span class="num">3</span>, name: <span class="str">"Charlie"</span> },
+];
+
+<span class="kw">const</span> found = users.<span class="fn">find</span>((u) => u.id === <span class="num">2</span>);
+console.<span class="fn">log</span>(found); <span class="cm">// { id: 2, name: "Bob" }</span>
+
+<span class="kw">const</span> none = users.<span class="fn">find</span>((u) => u.id === <span class="num">99</span>);
+console.<span class="fn">log</span>(none);  <span class="cm">// undefined</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-08.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s7')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Given a list of students with scores, use <code>.find()</code> to find the first student with a score over 90 and display their name.</p>
+
+          <div class="demo-area"><p id="out7">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx7()">▶ Run My Code</button>
+
+<pre class="solution" id="s7"><span class="kw">const</span> students = [
+  { name: <span class="str">"Alice"</span>,   score: <span class="num">75</span> },
+  { name: <span class="str">"Bob"</span>,     score: <span class="num">92</span> },
+  { name: <span class="str">"Charlie"</span>, score: <span class="num">88</span> },
+  { name: <span class="str">"Diana"</span>,   score: <span class="num">95</span> },
+];
+
+<span class="kw">const</span> topStudent = students.<span class="fn">find</span>((s) => s.score > <span class="num">90</span>);
+document.<span class="fn">getElementById</span>(<span class="str">"out7"</span>).textContent =
+  topStudent
+    ? <span class="str">`First student over 90: ${topStudent.name} (${topStudent.score})`</span>
+    : <span class="str">"No student found"</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(6)">← .filter()</button>
+        <button class="btn btn-primary" onclick="showLesson(8)">Next: .some() & .every() →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 8: .some() .every() ══ -->
+    <section class="lesson" id="lesson-8">
+      <div class="lesson-tag">Lesson 9 · Arrays</div>
+      <h1 class="lesson-title">.some() &amp; .every()</h1>
+      <p class="lesson-desc">These two methods check conditions across an array and return <code>true</code> or <code>false</code>.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p><code>.some()</code> → <strong>at least one</strong> item passes? Returns <code>true</code>.</p>
+        <p><code>.every()</code> → <strong>all</strong> items pass? Returns <code>true</code>.</p>
+      </div>
+
+<pre><span class="kw">const</span> ages = [<span class="num">17</span>, <span class="num">20</span>, <span class="num">15</span>, <span class="num">22</span>];
+
+ages.<span class="fn">some</span>((a) => a >= <span class="num">18</span>);   <span class="cm">// true  (20 and 22 pass)</span>
+ages.<span class="fn">every</span>((a) => a >= <span class="num">18</span>);  <span class="cm">// false (17 and 15 fail)</span>
+
+<span class="kw">const</span> scores = [<span class="num">80</span>, <span class="num">90</span>, <span class="num">85</span>];
+scores.<span class="fn">every</span>((s) => s >= <span class="num">70</span>); <span class="cm">// true  (all pass!)</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-09.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s8')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Given a cart of items, check: (1) does the cart have <strong>any</strong> item over $100? (2) are <strong>all</strong> items in stock?</p>
+
+          <div class="demo-area"><p id="out8">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx8()">▶ Run My Code</button>
+
+<pre class="solution" id="s8"><span class="kw">const</span> cart = [
+  { name: <span class="str">"Phone"</span>,  price: <span class="num">299</span>, inStock: <span class="kw">true</span> },
+  { name: <span class="str">"Case"</span>,   price: <span class="num">20</span>,  inStock: <span class="kw">true</span> },
+  { name: <span class="str">"Charger"</span>,price: <span class="num">35</span>,  inStock: <span class="kw">false</span> },
+];
+
+<span class="kw">const</span> hasExpensive = cart.<span class="fn">some</span>((i) => i.price > <span class="num">100</span>);
+<span class="kw">const</span> allInStock   = cart.<span class="fn">every</span>((i) => i.inStock);
+
+document.<span class="fn">getElementById</span>(<span class="str">"out8"</span>).textContent =
+  <span class="str">`Any item over $100? ${hasExpensive} | All in stock? ${allInStock}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(7)">← .find()</button>
+        <button class="btn btn-primary" onclick="showLesson(9)">Next: Object Basics →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 9: Objects ══ -->
+    <section class="lesson" id="lesson-9">
+      <div class="lesson-tag">Lesson 10 · Objects</div>
+      <h1 class="lesson-title">Object Basics</h1>
+      <p class="lesson-desc">An object groups related data together using <strong>key: value</strong> pairs — like a profile card for one thing.</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p>Access values with <code>object.key</code> (dot notation) or <code>object["key"]</code>.</p>
+        <p>You can add, change, or delete properties at any time.</p>
+      </div>
+
+<pre><span class="kw">const</span> user = {
+  name:  <span class="str">"John"</span>,
+  age:   <span class="num">25</span>,
+  email: <span class="str">"john@gmail.com"</span>,
+};
+
+user.name;         <span class="cm">// "John"</span>
+user[<span class="str">"age"</span>];      <span class="cm">// 25</span>
+
+user.age = <span class="num">26</span>;    <span class="cm">// update a value</span>
+user.city = <span class="str">"NY"</span>; <span class="cm">// add a new key</span>
+<span class="kw">delete</span> user.email; <span class="cm">// remove a key</span></pre>
+
+      <div class="exercise-label">✏️ Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-10.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s9')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>Create an object for a <strong>book</strong> with: <code>title</code>, <code>author</code>, <code>pages</code>, <code>year</code>. Then update the year and add an <code>isRead</code> property. Display it all.</p>
+
+          <div class="demo-area"><p id="out9">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx9()">▶ Run My Code</button>
+
+<pre class="solution" id="s9"><span class="kw">const</span> book = {
+  title:  <span class="str">"The Alchemist"</span>,
+  author: <span class="str">"Paulo Coelho"</span>,
+  pages:  <span class="num">208</span>,
+  year:   <span class="num">1988</span>,
+};
+
+book.year   = <span class="num">1993</span>;   <span class="cm">// update</span>
+book.isRead = <span class="kw">true</span>;   <span class="cm">// add new key</span>
+
+document.<span class="fn">getElementById</span>(<span class="str">"out9"</span>).textContent =
+  <span class="str">`"${book.title}" by ${book.author} | ${book.pages}p | ${book.year} | Read: ${book.isRead}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(8)">← .some() & .every()</button>
+        <button class="btn btn-primary" onclick="showLesson(10)">Next: Array of Objects →</button>
+      </div>
+    </section>
+
+    <!-- ══ LESSON 10: Array of Objects ══ -->
+    <section class="lesson" id="lesson-10">
+      <div class="lesson-tag">Lesson 11 · Objects</div>
+      <h1 class="lesson-title">Array of Objects</h1>
+      <p class="lesson-desc">Most real-world data is an array of objects — like a list of users from a database. Combine everything you learned!</p>
+
+      <div class="explain">
+        <h3>📖 How it works</h3>
+        <p>Use <code>.map()</code> to transform, <code>.filter()</code> to narrow down, and <code>.find()</code> to locate one item — all on arrays of objects.</p>
+      </div>
+
+<pre><span class="kw">const</span> users = [
+  { name: <span class="str">"Alice"</span>, age: <span class="num">22</span>, active: <span class="kw">true</span> },
+  { name: <span class="str">"Bob"</span>,   age: <span class="num">17</span>, active: <span class="kw">false</span> },
+  { name: <span class="str">"Carol"</span>, age: <span class="num">30</span>, active: <span class="kw">true</span> },
+];
+
+<span class="cm">// Get names of active adults</span>
+<span class="kw">const</span> result = users
+  .<span class="fn">filter</span>((u) => u.active && u.age >= <span class="num">18</span>)
+  .<span class="fn">map</span>((u) => u.name);
+
+console.<span class="fn">log</span>(result); <span class="cm">// ["Alice", "Carol"]</span></pre>
+
+      <div class="exercise-label">✏️ Final Exercise</div>
+      <div class="exercise-box">
+        <div class="exercise-header">
+          <span>exercise-11.html</span>
+          <button class="btn btn-ghost" onclick="toggleSolution('s10')">Show Solution</button>
+        </div>
+        <div class="exercise-body">
+          <p>You have an array of products. Do all three:</p>
+          <p>1️⃣ <code>.filter()</code> — only items in stock<br>
+             2️⃣ <code>.map()</code> — get their names + prices as strings<br>
+             3️⃣ <code>.find()</code> — find the first item over $50</p>
+
+          <div class="demo-area"><p id="out10" style="white-space: pre-line">👆 Click Run</p></div>
+          <button class="btn btn-primary" onclick="runEx10()">▶ Run My Code</button>
+
+<pre class="solution" id="s10"><span class="kw">const</span> products = [
+  { name: <span class="str">"Phone"</span>,  price: <span class="num">299</span>, inStock: <span class="kw">true</span> },
+  { name: <span class="str">"Cable"</span>,  price: <span class="num">12</span>,  inStock: <span class="kw">false</span> },
+  { name: <span class="str">"Case"</span>,   price: <span class="num">25</span>,  inStock: <span class="kw">true</span> },
+  { name: <span class="str">"Charger"</span>,price: <span class="num">45</span>,  inStock: <span class="kw">true</span> },
+];
+
+<span class="kw">const</span> inStock   = products.<span class="fn">filter</span>((p) => p.inStock);
+<span class="kw">const</span> labels    = inStock.<span class="fn">map</span>((p) => <span class="str">`${p.name} ($${p.price})`</span>);
+<span class="kw">const</span> expensive = inStock.<span class="fn">find</span>((p) => p.price > <span class="num">50</span>);
+
+document.<span class="fn">getElementById</span>(<span class="str">"out10"</span>).textContent =
+  <span class="str">`In stock: ${labels.join(", ")}\nFirst over $50: ${expensive?.name ?? "None"}`</span>;</pre>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="btn btn-ghost" onclick="showLesson(9)">← Object Basics</button>
+        <button class="btn btn-green" onclick="showLesson(0)">🎉 Start Over</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const TOTAL = 11;
+
+  function showLesson(n) {
+    document.querySelectorAll('.lesson').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+    document.getElementById('lesson-' + n).classList.add('active');
+    document.querySelectorAll('.nav-item')[n].classList.add('active');
+    document.getElementById('progress').style.width = ((n + 1) / TOTAL * 100) + '%';
+    window.scrollTo(0, 0);
+  }
+
+  function toggleSolution(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('show');
+  }
+
+  // ── Exercise runners ──
+  function runEx0() {
+    const myName = "Sarah", myAge = 22, myFood = "Pizza";
+    document.getElementById("out0").textContent =
+      `Name: ${myName}, Age: ${myAge}, Food: ${myFood}`;
+  }
+
+  function runEx1() {
+    function getGrade(score) {
+      if (score >= 90) return "🏆 A";
+      else if (score >= 75) return "👍 B";
+      else if (score >= 60) return "😐 C";
+      else return "❌ Fail";
+    }
+    document.getElementById("out1").textContent =
+      `Score 95: ${getGrade(95)} | Score 70: ${getGrade(70)} | Score 50: ${getGrade(50)}`;
+  }
+
+  const shirts = ["👕 Red Shirt","👕 Blue Shirt","👕 Black Shirt"];
+  const pants  = ["👖 Jeans","🩳 Shorts","👖 Black Pants"];
+  const shoes  = ["👟 Sneakers","🥾 Boots","🩴 Sandals"];
+  function pickOutfit() {
+    const shirt = shirts[Math.floor(Math.random() * shirts.length)];
+    const pant  = pants[Math.floor(Math.random() * pants.length)];
+    const shoe  = shoes[Math.floor(Math.random() * shoes.length)];
+    document.getElementById("outfit").textContent =
+      `Today's outfit: ${shirt} + ${pant} + ${shoe}`;
+  }
+
+  function runEx3() {
+    const total = 50 * 3;
+    const final = total - (total * 10 / 100);
+    document.getElementById("out3").textContent =
+      `Total: $${total} → After 10% off: $${final}`;
+  }
+
+  function runEx4() {
+    const students = ["Alice","Bob","Charlie"];
+    students.push("Diana"); students.push("Eve"); students.pop();
+    document.getElementById("out4").textContent =
+      `Students: ${students.join(", ")} | Total: ${students.length}`;
+  }
+
+  function runEx5() {
+    const celsius = [0, 20, 37, 100];
+    const fahrenheit = celsius.map(c => (c * 9/5) + 32);
+    document.getElementById("out5").textContent =
+      `Celsius: ${celsius} → Fahrenheit: ${fahrenheit}`;
+  }
+
+  function runEx6() {
+    const products = [
+      { name: "Shirt", price: 25 }, { name: "Shoes", price: 80 },
+      { name: "Hat", price: 15 },   { name: "Jacket", price: 120 },
+      { name: "Socks", price: 8 },
+    ];
+    const cheap = products.filter(p => p.price < 50).map(p => p.name);
+    document.getElementById("out6").textContent = `Affordable items: ${cheap.join(", ")}`;
+  }
+
+  function runEx7() {
+    const students = [
+      { name: "Alice", score: 75 }, { name: "Bob", score: 92 },
+      { name: "Charlie", score: 88 }, { name: "Diana", score: 95 },
+    ];
+    const top = students.find(s => s.score > 90);
+    document.getElementById("out7").textContent =
+      top ? `First student over 90: ${top.name} (${top.score})` : "No student found";
+  }
+
+  function runEx8() {
+    const cart = [
+      { name: "Phone",   price: 299, inStock: true },
+      { name: "Case",    price: 20,  inStock: true },
+      { name: "Charger", price: 35,  inStock: false },
+    ];
+    document.getElementById("out8").textContent =
+      `Any item over $100? ${cart.some(i => i.price > 100)} | All in stock? ${cart.every(i => i.inStock)}`;
+  }
+
+  function runEx9() {
+    const book = { title: "The Alchemist", author: "Paulo Coelho", pages: 208, year: 1988 };
+    book.year = 1993; book.isRead = true;
+    document.getElementById("out9").textContent =
+      `"${book.title}" by ${book.author} | ${book.pages}p | ${book.year} | Read: ${book.isRead}`;
+  }
+
+  function runEx10() {
+    const products = [
+      { name: "Phone",   price: 299, inStock: true },
+      { name: "Cable",   price: 12,  inStock: false },
+      { name: "Case",    price: 25,  inStock: true },
+      { name: "Charger", price: 45,  inStock: true },
+    ];
+    const inStock   = products.filter(p => p.inStock);
+    const labels    = inStock.map(p => `${p.name} ($${p.price})`);
+    const expensive = inStock.find(p => p.price > 50);
+    document.getElementById("out10").textContent =
+      `In stock: ${labels.join(", ")}\nFirst over $50: ${expensive?.name ?? "None"}`;
+  }
+</script>
+
+</body>
+</html>
